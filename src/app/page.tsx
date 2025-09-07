@@ -34,7 +34,7 @@ const glowBorder =
 function LayerCarousel() {
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const cards = [
     {
@@ -111,20 +111,20 @@ function LayerCarousel() {
       const interval = setInterval(() => {
         setActive((prev) => (prev + 1) % cards.length);
       }, 4000); // Change every 4 seconds
-      setTimer(interval);
+      timerRef.current = interval;
     } else {
-      if (timer) {
-        clearInterval(timer);
-        setTimer(null);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
       }
     }
 
     return () => {
-      if (timer) {
-        clearInterval(timer);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
       }
     };
-  }, [isHovered, cards.length, timer]);
+  }, [isHovered, cards.length]);
 
   return (
     <div className="mt-10">
