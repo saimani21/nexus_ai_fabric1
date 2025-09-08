@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 import {
   Cpu,
   GitBranch,
@@ -209,9 +210,9 @@ function OntologyAgentSpotlight() {
     <section id="ontology-agent" className="py-16 bg-white/2">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-semibold tracking-tight">Ontology Agent — Your Knowledge Fabric</h2>
+          <h2 className="text-3xl font-semibold tracking-tight">Ontology Management — Your Knowledge Fabric</h2>
           <p className="mt-3 text-white/70">
-            Our Ontology Agent turns raw, messy enterprise data into a governed knowledge graph—auto‑discovering entities &
+            Our Ontology Management System turns raw, messy enterprise data into a governed knowledge graph—auto‑discovering entities &
             relations, aligning them to your domain schema, and powering reliable retrieval & reasoning for every agent.
           </p>
         </div>
@@ -240,7 +241,7 @@ function OntologyAgentSpotlight() {
                 {/* Ontology layer rectangle */}
                 <rect x="170" y="40" width="260" height="260" rx="16" ry="16" fill="#0f172a" stroke="#334155" />
                 <text x="300" y="65" textAnchor="middle" fill="#e2e8f0" fontSize="14">
-                  Ontology Agent
+                  Ontology Management
                 </text>
                 {/* Graph nodes inside */}
                 <g stroke="#22d3ee" strokeWidth="1.5">
@@ -317,6 +318,24 @@ function OntologyAgentSpotlight() {
 }
 
 export default function Page() {
+  const [solutionsOpen, setSolutionsOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setSolutionsOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   return (
     <main className="min-h-screen bg-[#0b1020] text-white selection:bg-cyan-300/40">
       {/* Header */}
@@ -331,23 +350,74 @@ export default function Page() {
             </span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm text-white/70">
-            <a href="#layers" className="hover:text-white">
-              Architecture
-            </a>
-            <a href="#platform" className="hover:text-white">
-              Platform
-            </a>
+            {/* Solutions Dropdown */}
+            <div
+              className="relative"
+              ref={dropdownRef}
+            >
+              <button
+                className="hover:text-white flex items-center gap-1"
+                aria-haspopup="true"
+                aria-expanded={solutionsOpen}
+                onClick={() => setSolutionsOpen((prev) => !prev)}
+                type="button"
+              >
+                Solutions
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {solutionsOpen && (
+                <div className="absolute left-0 mt-2 w-48 rounded-xl bg-[#181e36] border border-white/10 shadow-lg z-50">
+                  <a
+                    href="#platform"
+                    onClick={() => setSolutionsOpen(false)}
+                    className="block px-4 py-2 hover:bg-cyan-400/10 text-white/90 rounded-b-xl"
+                  >
+                    NexusAI Platform
+                  </a>
+                  <a
+                    href="#ontology-agent"
+                    onClick={() => setSolutionsOpen(false)}
+                    className="block px-4 py-2 hover:bg-cyan-400/10 text-white/90 rounded-t-xl"
+                  >
+                    Ontology Management
+                  </a>
+                  <a
+                    href="#mcp"
+                    onClick={() => setSolutionsOpen(false)}
+                    className="block px-4 py-2 hover:bg-cyan-400/10 text-white/90 rounded-t-xl"
+                  >
+                    Agent Blueprints
+                  </a>
+                  <a
+                    href="#finops"
+                    onClick={() => setSolutionsOpen(false)}
+                    className="block px-4 py-2 hover:bg-cyan-400/10 text-white/90 rounded-t-xl"
+                  >
+                    FinOps & Monitoring
+                  </a>
+                  <a
+                    href="#layers"
+                    onClick={() => setSolutionsOpen(false)}
+                    className="block px-4 py-2 hover:bg-cyan-400/10 text-white/90 rounded-t-xl"
+                  >
+                    Guardrails & Policies
+                  </a>
+                </div>
+              )}
+            </div>
             <a href="#ontology-agent" className="hover:text-white">
-              Ontology Agent
+              Ontology Management
             </a>
-            <a href="#mcp" className="hover:text-white">
+                        {/* <a href="#mcp" className="hover:text-white">
               MCP
-            </a>
+            </a> */}
             <a href="#integrate" className="hover:text-white">
-              Integrate
+              Quickstart
             </a>
             <a href="#solutions" className="hover:text-white">
-              Market Place
+              Marketplace
             </a>
             <a href="#pricing" className="hover:text-white">
               Pricing
@@ -373,18 +443,93 @@ export default function Page() {
           <div className="absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-cyan-500/20 blur-3xl" />
           <div className="absolute -top-10 left-1/3 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-violet-500/20 blur-3xl" />
         </div>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-20">
-          <motion.div initial="hidden" animate="show" variants={fadeUp} className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
+        <div className="mx-auto max-w-10xl px-4 sm:px-6 lg:px-8 pt-16 pb-20">
+          <motion.div initial="hidden" animate="show" variants={fadeUp} className="mx-auto max-w-10xl text-center">
+            {/* <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
               <ShieldCheck className="h-3.5 w-3.5" /> Deploy on your cloud • AWS • Azure • GCP
-            </p>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-              The <span className="text-cyan-300">Enterprise AI Utility Layer</span>
+            </p> */}
+            <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl h-24 sm:h-32">
+              The <span className="text-cyan-300">Enterprise AI Acceleration</span> Platform
+              <br />
+              <span className="text-2xl sm:text-4xl font-normal">
+                <TypeAnimation
+                  sequence={[
+                    'Nexus AI : Where Data Becomes Decisions',
+                    2000,
+                    'Connect, Customize & Scale AI with Confidence',
+                    2000,
+                    'Seamless Integration, Smarter Cost Control',
+                    2000,
+                    'Workflows for People, Not Just Machines',
+                    2000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
+              </span>
             </h1>
+            <br />
+              {/* Nexus is a model & cloud agnostic fabric to ingest data, compose agents, and operate them securely at scale. */}
             <p className="mt-5 text-lg text-white/75">
-              Adopt AI fast—without infra headaches. Ingest data, compose agentic workflows, and operate them at scale. Save cost
-              with Nexus‑optimized LLM & VLM serving.
-            </p>
+            Nexus AI empowers every developer to build AI-native workflows with built-in guardrails, governance, and FinOps—across any data, any model, anywhere.            </p>
+            <br />
+            
+            <br />
+          <motion.h2
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-center text-3xl font-semibold tracking-tight"
+          >
+            Integrate  •  Scale  •  Operate  •  Compose
+          </motion.h2>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: 'Integrate Seamlessly',
+                desc: 'Connect Data Silos across ERP, CRM & Data sources. Pre‑built connectors and pipelines.',
+                icon: BookOpen,
+              },
+              {
+                title: 'Auto-Tune Ontology',
+                desc: 'Auto-discover entities & relations. Governed knowledge graph for reliable retrieval.',
+                icon: ShieldCheck,
+              },
+              {
+                title: 'Launch in Weeks',
+                desc: 'Launch AI agents and APIs in weeks, not years—secure, explainable, and cost-optimized.',
+                icon: Workflow,
+              },
+              {
+                title: 'Operate at Scale',
+                desc: 'Enterprise-grade governance, FinOps controls, and real-time observability built in.',
+                icon: ShieldCheck,
+              }
+            ].map((card, i) => (
+              <motion.div
+                key={card.title}
+                custom={i}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className={`${glowBorder} p-6`}
+              >
+                <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/5">
+                  <card.icon className="h-5 w-5 text-cyan-300" />
+                </div>
+                <h3 className="text-lg font-medium">{card.title}</h3>
+                <p className="mt-2 text-sm text-white/70">{card.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+            <br />
+        </div>
+
+
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a href="/demo" className="rounded-xl bg-white text-[#0b1020] px-5 py-3 font-medium hover:bg-white/90 transition">
                 Book a Demo
@@ -401,7 +546,7 @@ export default function Page() {
       </section>
 
       {/* Architecture */}
-      <section id="layers" className="py-16 bg-white/5">
+      {/* <section id="layers" className="py-16 bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-center text-3xl font-semibold tracking-tight">Nexus Architecture Layers</h2>
           <p className="mt-3 text-center text-white/70 max-w-3xl mx-auto">
@@ -410,10 +555,10 @@ export default function Page() {
           
           <LayerCarousel />
         </div>
-      </section>
+      </section> */}
 
       {/* Platform pillars */}
-      <section id="platform" className="py-16 bg-gradient-to-b from-white/3 to-white/8">
+      {/* <section id="platform" className="py-16 bg-gradient-to-b from-white/3 to-white/8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden"
@@ -422,7 +567,7 @@ export default function Page() {
             variants={fadeUp}
             className="text-center text-3xl font-semibold tracking-tight"
           >
-            Integrate • Operate • Compose
+            Integrate  •  Scale  •  Operate  •  Compose
           </motion.h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
@@ -460,7 +605,7 @@ export default function Page() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Ontology Agent (spotlight) */}
       <OntologyAgentSpotlight />
@@ -470,9 +615,9 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Centered Header */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold tracking-tight">Intelligent Tool Classifier & Orchestrator</h2>
+            <h2 className="text-3xl font-semibold tracking-tight">Agent Blueprints</h2>
             <p className="mt-3 text-white/70 max-w-3xl mx-auto">
-              Understands user intent and invokes the most relevant tool or service for any query.
+              Quickly compose, customize, and deploy AI agents using secure, governed blueprints that scale across data and models.
             </p>
           </div>
 
@@ -490,7 +635,7 @@ export default function Page() {
               <li className="flex gap-3">
                 <Workflow className="h-5 w-5 text-cyan-300" />
                 <div>
-                  <strong>Automated Orchestration</strong>
+                  <strong>Smart Orchestrator</strong>
                   <br />Combines retrieval, analytics, and actions when needed.
                 </div>
               </li>
@@ -526,71 +671,6 @@ export default function Page() {
         </div>
         </div>
       </section>
-
-      {/* Integrate section */}
-      <section id="integrate" className="py-16 bg-gradient-to-b from-white/6 to-white/3">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-semibold tracking-tight">Integrate Nexus in Minutes</h2>
-          <p className="mt-3 text-center text-white/70 max-w-3xl mx-auto">
-            SDK scaffolding, OpenAI‑compatible endpoints, and security tokens plug into existing apps with minimal boilerplate.
-          </p>
-          <div className="mt-10 grid gap-8 md:grid-cols-2 items-start">
-            <div className={`${glowBorder} p-6`}>
-              <h3 className="text-lg font-medium">Nexus SDK Installation</h3>
-              <pre className="mt-4 rounded-xl bg-black/60 p-4 text-sm leading-6 text-white/90 overflow-x-auto">{`# Install SDK and dependencies
-pip install nexus-ai-sdk
-
-# Initialize new project
-nexus init my-ai-project
-
-# Start with RAG template
-nexus template rag`}</pre>
-            </div>
-            <div className={`${glowBorder} p-6`}>
-              <ul className="space-y-6">
-                <li className="flex items-start gap-3">
-                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
-                    <Cpu className="h-5 w-5 text-cyan-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Automated Scaffolding</h3>
-                    <p className="text-sm text-white/70">Generates project structure & config—no manual setup.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
-                    <BookOpen className="h-5 w-5 text-cyan-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Pre‑Built Templates</h3>
-                    <p className="text-sm text-white/70">Kick off with RAG, fraud detection, knowledge management.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
-                    <Workflow className="h-5 w-5 text-cyan-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Seamless Integration</h3>
-                    <p className="text-sm text-white/70">OpenAI‑compatible endpoints & tokens drop into existing flows.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
-                    <LineChart className="h-5 w-5 text-cyan-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Built‑in FinOps</h3>
-                    <p className="text-sm text-white/70">Budgets, anomalies & routing recommendations.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-                  </div>
-      </section>
-
       {/* FinOps */}
       <section id="finops" className="py-16 bg-white/4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -645,6 +725,71 @@ nexus template rag`}</pre>
           </div>
         </div>
       </section>
+
+      {/* Integrate section */}
+      <section id="integrate" className="py-16 bg-gradient-to-b from-white/6 to-white/3">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center text-3xl font-semibold tracking-tight">Quickstart with NexusAI</h2>
+          <p className="mt-3 text-center text-white/70 max-w-3xl mx-auto">
+            SDK scaffolding, OpenAI‑compatible endpoints, and security tokens plug into existing apps with minimal boilerplate.
+          </p>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 items-start">
+            <div className={`${glowBorder} p-6`}>
+              <h3 className="text-lg font-medium">Nexus SDK Installation</h3>
+              <pre className="mt-4 rounded-xl bg-black/60 p-4 text-sm leading-6 text-white/90 overflow-x-auto">{`# Install SDK and dependencies
+pip install nexus-ai-sdk
+
+# Initialize new project
+nexus init my-ai-project
+
+# Start with RAG template
+nexus template rag`}</pre>
+            </div>
+            <div className={`${glowBorder} p-6`}>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-3">
+                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
+                    <Cpu className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Automated Scaffolding</h3>
+                    <p className="text-sm text-white/70">Generates project structure & config—no manual setup.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
+                    <BookOpen className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Pre‑Built Templates</h3>
+                    <p className="text-sm text-white/70">Kick off with RAG, fraud detection, knowledge management.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
+                    <Workflow className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Turnkey Integration</h3>
+                    <p className="text-sm text-white/70">OpenAI‑compatible endpoints & tokens drop into existing flows.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-0.5 h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
+                    <LineChart className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Built‑in FinOps</h3>
+                    <p className="text-sm text-white/70">Budgets, anomalies & routing recommendations.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+                  </div>
+      </section>
+
 
       {/* Use Case Spotlight */}
       <section id="use-case" className="py-16 bg-gradient-to-b from-white/3 to-white/6">
@@ -865,7 +1010,7 @@ nexus template rag`}</pre>
             </p>
           </div>
           <div>
-            <h4 className="mb-2 font-medium text-white">Platform</h4>
+            <h4 className="mb-2 font-medium text-white">Solutions</h4>
             <ul className="space-y-2">
               <li>
                 <a className="hover:text-white" href="#platform">
@@ -874,7 +1019,7 @@ nexus template rag`}</pre>
               </li>
               <li>
                 <a className="hover:text-white" href="#ontology-agent">
-                  Ontology Agent
+                  Ontology Management
                 </a>
               </li>
               <li>
