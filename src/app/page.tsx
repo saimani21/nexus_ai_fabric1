@@ -461,12 +461,13 @@ function OntologyAgentSpotlight() {
         {/* Key Benefits Grid */}
         <div className="mb-16">
           <h3 className="text-2xl font-semibold text-center mb-12">Key Benefits</h3>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             {[
               { title: "Competitive Advantage", desc: "Proprietary knowledge fabric creates a defensible AI moat", metric: "Defensible" },
-              { title: "Cost Efficiency", desc: "85% reduction in retraining compute costs", metric: "85% Savings" },
-              { title: "Agility", desc: "90% faster model refresh cycles", metric: "90% Faster" },
-              { title: "Risk Mitigation", desc: "Governance reduces AI drift, bias, and regulatory risk", metric: "Secure" }
+              { title: "Cost Efficiency", desc: "Up to 85% reduction in retraining and inference compute costs", metric: "85% Savings" },
+              { title: "Elastic Capacity", desc: "Autoscale across workloads and models with low latency and built-in failover", metric: "Scalability" },
+              { title: "Frictionless Adoption", desc: "20+ enterprise connectors, OpenAI-compatible APIs, and SDKs for rapid rollout", metric: "Integrations" },
+              { title: "Risk & Compliance", desc: "RBAC, audit trails, policy injection, and lineage for safe, compliant AI operations", metric: "Governance" }
             ].map((benefit, i) => (
               <motion.div
                 key={benefit.title}
@@ -731,7 +732,7 @@ export default function Page() {
             </h1>
             <div className="mt-8 sm:mt-12">
               <p className="text-lg text-white/75 leading-relaxed">
-                Nexus AI empowers every developer to build AI-native workflows with built-in guardrails, governance, and FinOps—across any data, any model, anywhere.
+                Nexus AI empowers every employer to build AI-native workflows with built-in guardrails, governance, and FinOps—across any data, any model, anywhere.
               </p>
             </div>
             <motion.h2
