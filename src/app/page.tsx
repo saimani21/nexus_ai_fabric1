@@ -204,112 +204,371 @@ function LayerCarousel() {
   );
 }
 
-/** Ontology Agent spotlight **/
+/** Ontology Management spotlight **/
 function OntologyAgentSpotlight() {
   return (
-    <section id="ontology-agent" className="py-16 bg-white/2">
+    <section id="ontology-agent" className="py-20 bg-gradient-to-b from-white/3 to-white/6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-semibold tracking-tight">Ontology Management — Your Knowledge Fabric</h2>
-          <p className="mt-3 text-white/70">
-            Our Ontology Management System turns raw, messy enterprise data into a governed knowledge graph—auto‑discovering entities &
-            relations, aligning them to your domain schema, and powering reliable retrieval & reasoning for every agent.
+        {/* Header Section */}
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <h2 className="text-4xl font-bold tracking-tight mb-6">
+            Ontology Management
+          </h2>
+          <h3 className="text-2xl font-semibold text-cyan-300 mb-6">
+            Your AI Is Only as Smart as Its Knowledge
+          </h3>
+          <p className="text-xl text-white/75 leading-relaxed">
+            Nexus AI transforms scattered enterprise knowledge into a governed, ontology-driven fabric—reducing errors, 
+            improving precision, and making AI explainable by design.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-2 items-center">
-          {/* Diagram / image card */}
-          <div className={`${glowBorder} p-5`}>
-            {/* Elegant inline SVG so you have a good default visual without assets */}
-            <div className="rounded-xl bg-white/5 p-4">
-              <svg viewBox="0 0 600 340" className="w-full h-auto">
-                <defs>
-                  <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.8" />
-                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.8" />
-                  </linearGradient>
-                </defs>
-                {/* Input nodes */}
-                <g>
-                  <circle cx="70" cy="70" r="20" fill="url(#grad)" opacity="0.7" />
-                  <circle cx="70" cy="170" r="20" fill="url(#grad)" opacity="0.7" />
-                  <circle cx="70" cy="270" r="20" fill="url(#grad)" opacity="0.7" />
-                  <text x="40" y="40" fill="#9ca3af" fontSize="12">
-                    Docs / DB / APIs
+        {/* Why It Matters Section */}
+        <div className="mb-16">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-semibold mb-4">Why It Matters</h3>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              Without ontology, AI guesses. With Nexus AI, AI knows. Centralize, govern, and structure 
+              knowledge across your entire enterprise.
+            </p>
+          </div>
+          
+          <div className="grid gap-6 md:grid-cols-3 mb-12">
+            {[
+              { 
+                title: "Faster Updates", 
+                desc: "90% quicker model refresh cycles",
+                icon: "⚡",
+                color: "from-yellow-400/20 to-orange-400/20"
+              },
+              { 
+                title: "Lower Costs", 
+                desc: "Reduce retraining compute by up to 85%",
+                icon: "💰",
+                color: "from-green-400/20 to-emerald-400/20"
+              },
+              { 
+                title: "Expert Collaboration", 
+                desc: "Teams validate AI-suggested relationships",
+                icon: "👥",
+                color: "from-blue-400/20 to-cyan-400/20"
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`${glowBorder} p-6 text-center`}
+              >
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-2xl`}>
+                  {item.icon}
+                </div>
+                <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
+                <p className="text-sm text-white/70">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Visual Diagram Section */}
+        <div className="mb-16">
+          <div className="grid gap-8 md:grid-cols-2 items-center">
+            {/* Left Column - Visual Diagram */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className={`${glowBorder} p-6`}
+            >
+              <div className="rounded-xl bg-white/5 p-4">
+                <svg viewBox="0 0 600 340" className="w-full h-auto">
+                  <defs>
+                    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.8" />
+                    </linearGradient>
+                  </defs>
+                  {/* Input nodes */}
+                  <g>
+                    <circle cx="70" cy="70" r="20" fill="url(#grad)" opacity="0.7" />
+                    <circle cx="70" cy="170" r="20" fill="url(#grad)" opacity="0.7" />
+                    <circle cx="70" cy="270" r="20" fill="url(#grad)" opacity="0.7" />
+                    <text x="40" y="40" fill="#9ca3af" fontSize="12">
+                      Docs / DB / APIs
+                    </text>
+                  </g>
+                  {/* Ontology layer rectangle */}
+                  <rect x="170" y="40" width="260" height="260" rx="16" ry="16" fill="#0f172a" stroke="#334155" />
+                  <text x="300" y="65" textAnchor="middle" fill="#e2e8f0" fontSize="14">
+                    Ontology Management
                   </text>
-                </g>
-                {/* Ontology layer rectangle */}
-                <rect x="170" y="40" width="260" height="260" rx="16" ry="16" fill="#0f172a" stroke="#334155" />
-                <text x="300" y="65" textAnchor="middle" fill="#e2e8f0" fontSize="14">
-                  Ontology Management
-                </text>
-                {/* Graph nodes inside */}
-                <g stroke="#22d3ee" strokeWidth="1.5">
-                  <line x1="220" y1="140" x2="300" y2="100" />
-                  <line x1="300" y1="100" x2="360" y2="160" />
-                  <line x1="300" y1="100" x2="260" y2="200" />
-                </g>
-                <g fill="#22d3ee">
-                  <circle cx="220" cy="140" r="6" />
-                  <circle cx="300" cy="100" r="8" />
-                  <circle cx="360" cy="160" r="6" />
-                  <circle cx="260" cy="200" r="6" />
-                </g>
-                <text x="300" y="300" textAnchor="middle" fill="#94a3b8" fontSize="12">
-                  Entities • Relations • Policies
-                </text>
-                {/* Output arrows */}
-                <g stroke="#8b5cf6" strokeWidth="2">
-                  <line x1="430" y1="100" x2="530" y2="100" />
-                  <line x1="430" y1="180" x2="530" y2="180" />
-                  <line x1="430" y1="260" x2="530" y2="260" />
-                </g>
-                <g fill="#8b5cf6">
-                  <polygon points="530,100 540,100 535,95" />
-                  <polygon points="530,180 540,180 535,175" />
-                  <polygon points="530,260 540,260 535,255" />
-                </g>
-                <text x="460" y="90" fill="#9ca3af" fontSize="12">
-                  RAG & Search
-                </text>
-                <text x="460" y="170" fill="#9ca3af" fontSize="12">
-                  Reasoning Agents
-                </text>
-                <text x="460" y="250" fill="#9ca3af" fontSize="12">
-                  Analytics
-                </text>
-              </svg>
+                  {/* Graph nodes inside */}
+                  <g stroke="#22d3ee" strokeWidth="1.5">
+                    <line x1="220" y1="140" x2="300" y2="100" />
+                    <line x1="300" y1="100" x2="360" y2="160" />
+                    <line x1="300" y1="100" x2="260" y2="200" />
+                  </g>
+                  <g fill="#22d3ee">
+                    <circle cx="220" cy="140" r="6" />
+                    <circle cx="300" cy="100" r="8" />
+                    <circle cx="360" cy="160" r="6" />
+                    <circle cx="260" cy="200" r="6" />
+                  </g>
+                  <text x="300" y="300" textAnchor="middle" fill="#94a3b8" fontSize="12">
+                    Entities • Relations • Policies
+                  </text>
+                  {/* Output arrows */}
+                  <g stroke="#8b5cf6" strokeWidth="2">
+                    <line x1="430" y1="100" x2="530" y2="100" />
+                    <line x1="430" y1="180" x2="530" y2="180" />
+                    <line x1="430" y1="260" x2="530" y2="260" />
+                  </g>
+                  <g fill="#8b5cf6">
+                    <polygon points="530,100 540,100 535,95" />
+                    <polygon points="530,180 540,180 535,175" />
+                    <polygon points="530,260 540,260 535,255" />
+                  </g>
+                  <text x="460" y="90" fill="#9ca3af" fontSize="12">
+                    RAG & Search
+                  </text>
+                  <text x="460" y="170" fill="#9ca3af" fontSize="12">
+                    Reasoning Agents
+                  </text>
+                  <text x="460" y="250" fill="#9ca3af" fontSize="12">
+                    Analytics
+                  </text>
+                </svg>
+              </div>
+            </motion.div>
+
+            {/* Right Column - What it does */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className={`${glowBorder} p-6`}
+            >
+              <h3 className="text-xl font-semibold mb-6">What it does</h3>
+              <ul className="space-y-4 text-sm text-white/80 mb-6">
+                <li className="flex gap-3 items-start">
+                  <Sparkles className="mt-0.5 h-4 w-4 text-cyan-300 flex-shrink-0" /> 
+                  <span>Auto‑discovers entities, relations, and synonyms across documents & systems.</span>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <GitBranch className="mt-0.5 h-4 w-4 text-cyan-300 flex-shrink-0" /> 
+                  <span>Aligns to your domain ontology; maintains consistency as schemas evolve.</span>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <ShieldCheck className="mt-0.5 h-4 w-4 text-cyan-300 flex-shrink-0" /> 
+                  <span>Applies policies & access control at the node/edge level for safe retrieval.</span>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <Workflow className="mt-0.5 h-4 w-4 text-cyan-300 flex-shrink-0" /> 
+                  <span>Feeds Workspace workflows and the MCP classifier with structured context.</span>
+                </li>
+              </ul>
+              <div className="grid grid-cols-2 gap-3 text-xs text-white/70">
+                <div className="rounded-lg border border-white/10 p-3 bg-white/5">📦 20+ connectors</div>
+                <div className="rounded-lg border border-white/10 p-3 bg-white/5">🧠 HITL curation</div>
+                <div className="rounded-lg border border-white/10 p-3 bg-white/5">🔎 Hybrid retrieval</div>
+                <div className="rounded-lg border border-white/10 p-3 bg-white/5">🔐 Row/edge ACLs</div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Core Capabilities */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-semibold text-center mb-12">Core Capabilities</h3>
+          <div className="grid gap-8 lg:grid-cols-2 items-start">
+            {/* Left Column - Capabilities List */}
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Intelligent Discovery",
+                  desc: "Automatically discovers entities, relationships, and hierarchies across structured and unstructured data",
+                  icon: Database
+                },
+                {
+                  title: "Knowledge Graph Store", 
+                  desc: "Version-controlled, queryable ontologies with full lineage, governance, and auditability",
+                  icon: GitBranch
+                },
+                {
+                  title: "Human-in-the-Loop Curation",
+                  desc: "Domain experts validate AI-suggested entities and relationships to ensure precision",
+                  icon: ShieldCheck
+                },
+                {
+                  title: "Delta Retraining",
+                  desc: "Update only what changes—cut retraining costs by up to 80% while keeping AI current",
+                  icon: Workflow
+                }
+              ].map((capability, i) => (
+                <motion.div
+                  key={capability.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`${glowBorder} p-5`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-400/20 flex items-center justify-center">
+                      <capability.icon className="h-5 w-5 text-cyan-300" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">{capability.title}</h4>
+                      <p className="text-sm text-white/70">{capability.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right Column - How It Works */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className={`${glowBorder} p-6`}
+            >
+              <h4 className="text-lg font-semibold mb-6 text-center">How It Works</h4>
+              <div className="space-y-4">
+                {[
+                  { step: "1", title: "Ingest & Extract", desc: "Connector agents pull data from systems, records, and documentation" },
+                  { step: "2", title: "Build & Validate", desc: "LLM-powered engine identifies entities; graph enforces structural integrity" },
+                  { step: "3", title: "Collaborate", desc: "Experts review and refine knowledge via intuitive web platform" },
+                  { step: "4", title: "Deploy & Consume", desc: "Ontology-enhanced AI powers detection, reporting, and monitoring" }
+                ].map((step, i) => (
+                  <div key={step.step} className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400/30 to-violet-400/30 flex items-center justify-center text-sm font-semibold text-cyan-300">
+                      {step.step}
+                    </div>
+                    <div>
+                      <h5 className="font-medium text-sm mb-1">{step.title}</h5>
+                      <p className="text-xs text-white/60">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Key Benefits Grid */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-semibold text-center mb-12">Key Benefits</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Competitive Advantage", desc: "Proprietary knowledge fabric creates a defensible AI moat", metric: "Defensible" },
+              { title: "Cost Efficiency", desc: "85% reduction in retraining compute costs", metric: "85% Savings" },
+              { title: "Agility", desc: "90% faster model refresh cycles", metric: "90% Faster" },
+              { title: "Risk Mitigation", desc: "Governance reduces AI drift, bias, and regulatory risk", metric: "Secure" }
+            ].map((benefit, i) => (
+              <motion.div
+                key={benefit.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`${glowBorder} p-6 text-center`}
+              >
+                <div className="text-2xl font-bold text-cyan-300 mb-2">{benefit.metric}</div>
+                <h4 className="font-semibold mb-2">{benefit.title}</h4>
+                <p className="text-sm text-white/70">{benefit.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Real-World Example */}
+        <div className={`${glowBorder} p-8`}>
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-semibold mb-4">Real-World Impact</h3>
+            <p className="text-white/70 max-w-3xl mx-auto">
+              See how enterprises transform complex data into actionable intelligence with measurable results.
+            </p>
+          </div>
+          
+          <div className="grid gap-8 lg:grid-cols-2 items-center">
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-green-400/20 flex items-center justify-center">
+                  <span className="text-green-300 font-bold text-lg">✓</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Enhanced Accuracy</h4>
+                  <p className="text-sm text-white/70">AI decisions are more precise and explainable with structured knowledge</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-300 font-bold text-lg">⚡</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Automated Reporting</h4>
+                  <p className="text-sm text-white/70">Compliance reports generated automatically with full traceability</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-purple-400/20 flex items-center justify-center">
+                  <span className="text-purple-300 font-bold text-lg">📊</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Continuous Intelligence</h4>
+                  <p className="text-sm text-white/70">Knowledge graph provides continuously updated, governed view of relationships</p>
+                </div>
+              </div>
             </div>
             
-          </div>
-
-          {/* Copy / bullets */}
-          <div className={`${glowBorder} p-6`}>
-            <h3 className="text-xl font-semibold">What it does</h3>
-            <ul className="mt-3 space-y-3 text-sm text-white/80">
-              <li className="flex gap-2">
-                <Sparkles className="mt-0.5 h-4 w-4 text-cyan-300" /> Auto‑discovers entities, relations, and synonyms across
-                documents & systems.
-              </li>
-              <li className="flex gap-2">
-                <GitBranch className="mt-0.5 h-4 w-4 text-cyan-300" /> Aligns to your domain ontology; maintains consistency as
-                schemas evolve.
-              </li>
-              <li className="flex gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 text-cyan-300" /> Applies policies & access control at the node/edge level for
-                safe retrieval.
-              </li>
-              <li className="flex gap-2">
-                <Workflow className="mt-0.5 h-4 w-4 text-cyan-300" /> Feeds Workspace workflows and the MCP classifier with
-                structured context.
-              </li>
-            </ul>
-            <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-white/70">
-              <div className="rounded-lg border border-white/10 p-3 bg-white/5">📦 20+ connectors</div>
-              <div className="rounded-lg border border-white/10 p-3 bg-white/5">🧠 HITL curation</div>
-              <div className="rounded-lg border border-white/10 p-3 bg-white/5">🔎 Hybrid retrieval</div>
-              <div className="rounded-lg border border-white/10 p-3 bg-white/5">🔐 Row/edge ACLs</div>
+            <div className="bg-gradient-to-br from-white/5 to-white/10 rounded-xl p-6 border border-white/10">
+              <h4 className="font-semibold mb-4 text-center">The Result</h4>
+              <div className="space-y-4 text-sm">
+                <div className="flex justify-between items-center py-2 border-b border-white/10">
+                  <span className="text-white/70">Model Accuracy</span>
+                  <span className="text-green-300 font-semibold">+94%</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-white/10">
+                  <span className="text-white/70">Training Time</span>
+                  <span className="text-blue-300 font-semibold">-85%</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-white/10">
+                  <span className="text-white/70">Update Cycles</span>
+                  <span className="text-purple-300 font-semibold">90% Faster</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-white/70">Compliance Risk</span>
+                  <span className="text-cyan-300 font-semibold">Minimized</span>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <p className="text-lg text-white/80 mb-6 max-w-3xl mx-auto">
+            With Nexus AI, your enterprise knowledge becomes actionable intelligence, not just data. 
+            Make AI precise, explainable, and strategic.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/demo"
+              className="inline-flex items-center gap-2 rounded-xl bg-cyan-400/90 px-6 py-3 font-medium text-[#0b1020] hover:bg-cyan-300 transition"
+            >
+              See It In Action <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#integrate"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 font-medium text-white/90 hover:bg-white/5 transition"
+            >
+              Learn More
+            </a>
           </div>
         </div>
       </div>
@@ -448,10 +707,11 @@ export default function Page() {
             {/* <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
               <ShieldCheck className="h-3.5 w-3.5" /> Deploy on your cloud • AWS • Azure • GCP
             </p> */}
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl h-24 sm:h-32">
-              The <span className="text-cyan-300">Enterprise AI Acceleration</span> Platform
-              <br />
-              <span className="text-2xl sm:text-4xl font-normal">
+            <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
+              <div className="mb-4 sm:mb-6">
+                The <span className="text-cyan-300">Enterprise AI Acceleration</span> Platform
+              </div>
+              <div className="text-2xl sm:text-4xl font-normal min-h-[3rem] sm:min-h-[4rem] flex items-center justify-center">
                 <TypeAnimation
                   sequence={[
                     'Nexus AI : Where Data Becomes Decisions',
@@ -467,24 +727,22 @@ export default function Page() {
                   speed={50}
                   repeat={Infinity}
                 />
-              </span>
+              </div>
             </h1>
-            <br />
-              {/* Nexus is a model & cloud agnostic fabric to ingest data, compose agents, and operate them securely at scale. */}
-            <p className="mt-5 text-lg text-white/75">
-            Nexus AI empowers every developer to build AI-native workflows with built-in guardrails, governance, and FinOps—across any data, any model, anywhere.            </p>
-            <br />
-            
-            <br />
-          <motion.h2
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-center text-3xl font-semibold tracking-tight"
-          >
-            Integrate  •  Scale  •  Operate  •  Compose
-          </motion.h2>
+            <div className="mt-8 sm:mt-12">
+              <p className="text-lg text-white/75 leading-relaxed">
+                Nexus AI empowers every developer to build AI-native workflows with built-in guardrails, governance, and FinOps—across any data, any model, anywhere.
+              </p>
+            </div>
+            <motion.h2
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="text-center text-2xl sm:text-3xl font-semibold tracking-tight mt-12 sm:mt-16"
+            >
+              Integrate  •  Scale  •  Operate  •  Compose
+            </motion.h2>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -1030,7 +1288,7 @@ nexus template rag`}</pre>
             </ul>
           </div>
           <div>
-            <h4 className="mb-2 font-medium text-white">Solutions</h4>
+            <h4 className="mb-2 font-medium text-white">Products</h4>
             <ul className="space-y-2">
               <li>
                 <a className="hover:text-white" href="#solutions">
